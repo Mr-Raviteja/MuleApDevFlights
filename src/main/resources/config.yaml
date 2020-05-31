@@ -1,0 +1,23 @@
+http:
+  port: "8081"
+  
+american:
+  host: "training4-american-api-madi.us-e2.cloudhub.io"
+  port: "80"
+  basepath: "/"
+  protocol: "HTTP"
+  client_id: "545f088285ba491e8da6ff5c205719df"
+  client_secret: "5F80a67abE134B82B7096d88d51008bb"
+  
+  
+  
+#http:
+#  port: "8081"
+#  
+#american:
+#  host: "training4-american-api.cloudhub.io"
+#  port: "80"
+#  basepath: "/"
+#  protocol: "HTTP"
+#  client_id: "d846d01ea59640108779eaaa532d00ca"
+#  client_secret: "F7C5ecA48EBA449399b4B140416849B0"
