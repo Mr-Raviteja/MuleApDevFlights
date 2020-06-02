@@ -15,6 +15,12 @@ training:
   port: "80"
   basepath: "/"
   protocol: "HTTP"
+
+
+delta:
+  wsdl: "http://mu.learn.mulesoft.com/delta?wsdl"
+  service: "TicketServiceService"
+  port: "TicketServicePort"
     
 #http:
 #  port: "8081"
