@@ -7,6 +7,10 @@ http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/htt
 http://www.mulesoft.org/schema/mule/american-flights-api http://www.mulesoft.org/schema/mule/american-flights-api/current/mule-american-flights-api.xsd">
 	<flow name="getAmericanFlights" doc:id="3e1c3808-ca2b-40fc-b9a0-0f0bb64e5066" >
 		<http:listener doc:name="GET /american" doc:id="75bd19f4-17ed-40da-8713-383010686804" config-ref="HTTP_Listener_config" path="/american" allowedMethods="GET"/>
-		<american-flights-api:get-flights doc:name="Get flights" doc:id="6bb5af18-f28d-46b3-812e-bc006083c900" config-ref="American_Flights_API_Config" client-id="${american.client_id}" client-secret="${american.client_secret}"/>
+		<flow-ref doc:name="setCode" doc:id="b42b8bfd-11f4-492f-9be3-9e863c922871" name="setCode"/>
+		<american-flights-api:get-flights doc:name="Get flights" doc:id="19fddfd2-5fe0-429f-b024-84698cfef2e9" config-ref="American_Flights_API_Config" client-id="${american.client_id}" client-secret="${american.client_secret}" destination="#[vars.code]"/>
 	</flow>
+	<sub-flow name="setCode" doc:id="4f1b2bff-7fdd-41e3-9e71-06909009c3fb" >
+		<set-variable value="#[message.attributes.queryParams.code default 'SFO']" doc:name="code" doc:id="a9538081-cc3f-4d39-9a54-8c55356da0c5" variableName="code"/>
+	</sub-flow>
 </mule>

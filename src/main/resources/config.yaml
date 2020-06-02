@@ -10,7 +10,12 @@ american:
   client_secret: "5F80a67abE134B82B7096d88d51008bb"
   
   
-  
+training:
+  host: "mu.learn.mulesoft.com"
+  port: "80"
+  basepath: "/"
+  protocol: "HTTP"
+    
 #http:
 #  port: "8081"
 #  
