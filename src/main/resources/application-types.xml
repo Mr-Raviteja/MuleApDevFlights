@@ -68,7 +68,7 @@ type united_flights_json = {|
       </types:output-event>
     </types:processor-declaration>
   </types:enrichment>
-  <types:enrichment select="#677ed900-e913-4e96-bb96-5d1eaf8a8d4d">
+  <types:enrichment select="#bf1161e7-b339-4076-821e-86db2db75ae9">
     <types:processor-declaration>
       <types:output-event>
         <types:message>
