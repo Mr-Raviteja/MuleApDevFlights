@@ -219,4 +219,18 @@ payload.body.ns0#listAllFlightsResponse.*return map ( return , indexOfReturn ) -
 		</ee:transform>
 		<logger level="INFO" doc:name="Logger" doc:id="392ea5ba-d165-468b-a270-86941e995555" />
 	</flow>
+	<flow name="postFlight" doc:id="f3f33ba7-5735-48f3-80c5-869a8cbbe2f1" >
+		<ee:transform doc:name="Transform Message" doc:id="28dafdcd-8d32-4d81-9382-84c9535ad431" >
+			<ee:message >
+				<ee:set-payload resource="json_flight_playground.dwl" />
+			</ee:message>
+			<ee:variables >
+				<ee:set-variable variableName="DWoutput" ><![CDATA[%dw 2.0
+output application/xml
+---
+payload]]></ee:set-variable>
+			</ee:variables>
+		</ee:transform>
+		<logger level="INFO" doc:name="Logger" doc:id="fc624b1b-1e51-459d-87c8-12b250c3efae" />
+	</flow>
 </mule>
