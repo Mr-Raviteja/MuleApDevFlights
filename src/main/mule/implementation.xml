@@ -228,9 +228,15 @@ payload.body.ns0#listAllFlightsResponse.*return map ( return , indexOfReturn ) -
 				<ee:set-variable variableName="DWoutput" ><![CDATA[%dw 2.0
 output application/xml
 ---
-payload]]></ee:set-variable>
+data:{
+	hub:"MUA",
+	flight @(airline:payload.airline):{
+	code:payload.toAirportCode
+	
+	}
+}]]></ee:set-variable>
 			</ee:variables>
 		</ee:transform>
-		<logger level="INFO" doc:name="Logger" doc:id="fc624b1b-1e51-459d-87c8-12b250c3efae" />
+		<logger level="INFO" doc:name="Logger" doc:id="fc624b1b-1e51-459d-87c8-12b250c3efae" message="#[vars.DWoutput]"/>
 	</flow>
 </mule>
