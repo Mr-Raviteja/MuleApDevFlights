@@ -2,6 +2,12 @@
   "sampleData": {
     "28dafdcd-8d32-4d81-9382-84c9535ad431": {
       "payload": "sample_data/json.json"
+    },
+    "5838f9a5-bd05-43c6-a9a2-ccf1c6d542e8": {
+      "payload": "sample_data/list_json.json"
+    },
+    "1e442128-f19b-4d05-b456-8835ec5a8cf1": {
+      "payload": "sample_data/listallflightsresponse.xml"
     }
   }
 }

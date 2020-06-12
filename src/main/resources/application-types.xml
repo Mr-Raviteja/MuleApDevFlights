@@ -86,4 +86,13 @@ type united_flights_json = {|
       </types:input-event>
     </types:processor-declaration>
   </types:enrichment>
+  <types:enrichment select="#1e442128-f19b-4d05-b456-8835ec5a8cf1">
+    <types:processor-declaration>
+      <types:input-event>
+        <types:message>
+          <types:payload type="flights_xml"/>
+        </types:message>
+      </types:input-event>
+    </types:processor-declaration>
+  </types:enrichment>
 </types:mule>
