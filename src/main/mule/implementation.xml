@@ -244,8 +244,7 @@ data:{
 		<ee:transform doc:name="Transform Message" doc:id="e92d8a1c-768a-4625-9aac-62405391bb21" >
 			<ee:message >
 				<ee:set-payload ><![CDATA[%dw 2.0
-output application/java
-
+output application/dw
 //var numSeats=400
 //var numSeats = (x=400) -> x
 /*var numSeats = (planeType: String) ->
@@ -253,6 +252,7 @@ output application/java
 		150
 	else
 		300*/
+import dasherize from dw::core::Strings		
 type Currency=String {format:"###.00"}
 fun getNumSeats(planeType:String) =
 	if(planeType contains('737'))
@@ -267,11 +267,15 @@ using(flights=
 		destination: object.destination,
 		price: object.price as Number as Currency ,
 		//totalSeats:getNumSeats(object.planeType as String),
-		planeType: upper(object.planeType as String),
-		departureDate:object.departureDate as Date {format:"yyyy/MM/dd"} as String {format:"MMM dd yyyy"}
-	} as Flight
+		planeType: dasherize(replace(object.planeType,/(Boing)/) with "Boeing"),
+		departureDate:object.departureDate as Date {format:"yyyy/MM/dd"} as String {format:"MMM dd yyyy"},
+		avaliableSeats:object.emptySeats as Number
+	} as Flight 
 	)
-flights]]></ee:set-payload>
+flights distinctBy $
+			filter ($.avaliableSeats !=0)
+			orderBy $.departureDate
+			orderBy $.price]]></ee:set-payload>
 			</ee:message>
 		</ee:transform>
 		<logger level="INFO" doc:name="Logger" doc:id="f734a62d-572c-47ff-a053-3d3a5c209391" />
