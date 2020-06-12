@@ -241,7 +241,7 @@ data:{
 	</flow>
 	<flow name="postMultipleFlights" doc:id="f82fdc07-a1bc-4ae2-bb35-91262c28a3d2" >
 		<http:listener doc:name="POST /multipleflights" doc:id="09e10db0-0d5f-42e9-b688-84ce9ea5c80c" config-ref="HTTP_Listener_config" path="/multipleflights" allowedMethods="POST"/>
-		<ee:transform doc:name="Transform Message" doc:id="1e442128-f19b-4d05-b456-8835ec5a8cf1" >
+		<ee:transform doc:name="Transform Message" doc:id="e92d8a1c-768a-4625-9aac-62405391bb21" >
 			<ee:message >
 				<ee:set-payload ><![CDATA[%dw 2.0
 output application/dw
@@ -253,18 +253,20 @@ output application/dw
 		150
 	else
 		300*/
-fun getNumSeats(planeType:String)=
+fun getNumSeats(planeType:String) =
 	if(planeType contains('737'))
 		150
 	else
 		300
 ---
+
 using(flights= 
 	payload..*return map (object,index) -> {
 		dest: object.destination,
-		price: object.price,
+		price: object.price as Number as String {format:"###.00"},
 		totalSeats:getNumSeats(object.planeType as String),
-		plane:object.planeType
+		plane: upper(object.planeType as String),
+		date:object.departureDate as Date {format:"yyyy/MM/dd"} as String {format:"MMM dd yyyy"}
 	})
 flights]]></ee:set-payload>
 			</ee:message>
