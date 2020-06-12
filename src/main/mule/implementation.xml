@@ -244,7 +244,7 @@ data:{
 		<ee:transform doc:name="Transform Message" doc:id="e92d8a1c-768a-4625-9aac-62405391bb21" >
 			<ee:message >
 				<ee:set-payload ><![CDATA[%dw 2.0
-output application/dw
+output application/java
 
 //var numSeats=400
 //var numSeats = (x=400) -> x
@@ -253,21 +253,24 @@ output application/dw
 		150
 	else
 		300*/
+type Currency=String {format:"###.00"}
 fun getNumSeats(planeType:String) =
 	if(planeType contains('737'))
 		150
 	else
 		300
+type Flight=Object {class:"com.mulesoft.training.Flight"}
 ---
 
 using(flights= 
 	payload..*return map (object,index) -> {
-		dest: object.destination,
-		price: object.price as Number as String {format:"###.00"},
-		totalSeats:getNumSeats(object.planeType as String),
-		plane: upper(object.planeType as String),
-		date:object.departureDate as Date {format:"yyyy/MM/dd"} as String {format:"MMM dd yyyy"}
-	})
+		destination: object.destination,
+		price: object.price as Number as Currency ,
+		//totalSeats:getNumSeats(object.planeType as String),
+		planeType: upper(object.planeType as String),
+		departureDate:object.departureDate as Date {format:"yyyy/MM/dd"} as String {format:"MMM dd yyyy"}
+	} as Flight
+	)
 flights]]></ee:set-payload>
 			</ee:message>
 		</ee:transform>
